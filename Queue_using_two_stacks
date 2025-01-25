@@ -1,0 +1,39 @@
+class QueueUsingTwoStacks:
+    def __init__(self):
+        self.stack_in = []
+        self.stack_out = []
+
+    def enqueue(self, x):
+        self.stack_in.append(x)
+
+    def dequeue(self):
+        if not self.stack_out:
+            while self.stack_in:
+                self.stack_out.append(self.stack_in.pop())
+        if self.stack_out:
+            return self.stack_out.pop()
+
+    def front(self):
+        if not self.stack_out:
+            while self.stack_in:
+                self.stack_out.append(self.stack_in.pop())
+        if self.stack_out:
+            return self.stack_out[-1]
+
+q = int(input())
+
+queue = QueueUsingTwoStacks()
+
+for _ in range(q):
+    query = input().split()
+    type_of_query = int(query[0])
+    
+    if type_of_query == 1:
+        x = int(query[1])
+        queue.enqueue(x)
+        
+    elif type_of_query == 2:
+        queue.dequeue()
+        
+    elif type_of_query == 3:
+        print(queue.front())
