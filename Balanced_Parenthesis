@@ -1,0 +1,14 @@
+def isBalanced(s):
+    stk = []
+    pairs = {')':'(', ']':'[', '}':'{'}
+    
+    for ch in s:
+        if ch in '{[(':
+            stk.append(ch)
+        elif ch in ']})':
+            if (len(stk)==0) or stk[-1] != pairs[ch] :
+                return 'NO'
+            else:
+                stk.pop()
+                
+    return 'YES' if len(stk)==0 else 'NO'
